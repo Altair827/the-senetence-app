@@ -1,8 +1,13 @@
+import 'materialize-css/dist/css/materialize.min.css';
+import 'jquery/dist/jquery.min';
+import 'materialize-css/dist/js/materialize.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+
+ReactDOM.render(
+<div className="container">
+  <App />
+</div>
+, document.getElementById('root'));
