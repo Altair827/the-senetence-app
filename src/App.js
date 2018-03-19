@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InputPanel from './components/InputPanel';
 import WordListPanel from './components/WordListPanel';
+import AnswerPanel from './components/AnswerPanel'
 import { connect } from 'react-redux';
 
 class App extends Component {
@@ -21,7 +22,11 @@ class App extends Component {
 
                 {
                   this.props.showJumbledWords &&
-                  <WordListPanel />
+
+                  <div>
+                    <AnswerPanel />
+                    <WordListPanel />
+                  </div>
                 }
 
               </div>

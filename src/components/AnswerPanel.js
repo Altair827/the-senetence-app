@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import WordBox from './WordBox'
-import { addToAnswer } from './../actions/SentenceActions'
 
-class WordListPanel extends Component {
+class AnswerPanel extends Component {
+
   render() {
     return (
       <div>
         {
-          this.props.jumbledWords.map((word) => (
+          this.props.answerWords.map((word) => (
             <WordBox
               key={word.id}
               word={word.word}
               id={word.id}
-              action={() => (this.props.addToAnswer(word.id))}
             />
-            ))
+          ))
         }
       </div>
     )
@@ -23,15 +22,17 @@ class WordListPanel extends Component {
 }
 
 const mapStateToProps = ( SentenceReducer ) => {
-  return {
-    jumbledWords : SentenceReducer.JumbledWords
-  };
+  console.log(SentenceReducer.answerWords);
+  return ({
+    answerWords : SentenceReducer.answerWords,
+    enableUpdateButton : SentenceReducer.enableUpdateButton
+  });
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToAnswer : (id) => dispatch(addToAnswer(id))
+
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WordListPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(AnswerPanel);

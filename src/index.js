@@ -1,7 +1,8 @@
 import 'materialize-css/dist/css/materialize.min.css';
+import './css/main.css'
 import 'jquery/dist/jquery.min';
 import 'materialize-css/dist/js/materialize.min';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import SentenceReducer from './reducers/SentenceReducers';
 import React from 'react';

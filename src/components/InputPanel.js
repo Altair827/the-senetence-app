@@ -20,7 +20,8 @@ class InputPanel extends Component {
         <div
           id="updateButton"
           disabled={!this.props.enableUpdateButton}
-          className="waves-effect waves-light btn" onClick={() => {this.props.jumbleWords()}}
+          className="waves-effect waves-light btn"
+          onClick={() => {this.props.jumbleWords()}}
         >
           UPDATE
         </div>
