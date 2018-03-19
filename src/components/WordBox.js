@@ -4,7 +4,7 @@ class WordBox extends Component {
   render() {
     return (
       <div
-        className="btn hoverable left blue margin-right-20"
+        className={"btn hoverable left margin-right-20 " + this.props.style}
         onClick={() => {this.props.action()}}
       >
         {this.props.word}

@@ -53,6 +53,19 @@ export default function SentenceReducer(state = initialState,action){
           wordsRemaining : state.wordsRemaining-1
         })
 
+    case SentenceActions.REMOVE_FROM_ANSWER:
+
+        let wordToRemove = state.answerWords.filter((word) => word.id === action.id)[0];
+        let answerArray = state.answerWords.filter((word) => word.id !== action.id);
+        let JumbledWords = state.JumbledWords;
+        JumbledWords.push(wordToRemove);
+
+        return Object.assign({}, state, {
+          JumbledWords : JumbledWords,
+          answerWords : answerArray,
+          wordsRemaining : state.wordsRemaining+1
+        })
+
     default:
       return state;
   }
