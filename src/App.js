@@ -26,6 +26,29 @@ class App extends Component {
                   <div>
                     <AnswerPanel />
                     <WordListPanel />
+
+                    {
+                      this.props.showResult &&
+
+                      <div className="row">
+                        {
+                          this.props.isSentenceCorrect ?
+
+                          <div className="col m12 s12">
+                            <h4 className="green-text center">Correct!</h4>
+                          </div>
+
+                          :
+
+                          <div className="col m12 s12">
+                            <h4 className="red-text center">Incorrect</h4>
+                          </div>
+
+                        }
+                      </div>
+
+                    }
+
                   </div>
                 }
 
@@ -43,7 +66,9 @@ class App extends Component {
 const mapStateToProps = ( SentenceReducer ) => {
   return {
     showJumbledWords : SentenceReducer.showJumbledWords,
-    JumbledWords : SentenceReducer.JumbledWords
+    JumbledWords : SentenceReducer.JumbledWords,
+    showResult : SentenceReducer.showResult,
+    isSentenceCorrect : SentenceReducer.isSentenceCorrect
   };
 }
 

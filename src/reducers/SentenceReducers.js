@@ -6,9 +6,10 @@ const initialState = {
   answerWords : [],
   enableUpdateButton : false,
   showJumbledWords : false,
-  isSentenceCorrect : false,
+  isSentenceCorrect : null,
   sentenceLength : 0,
-  wordsRemaining : 0
+  wordsRemaining : 0,
+  showResult : false
 }
 
 export default function SentenceReducer(state = initialState,action){
@@ -20,7 +21,9 @@ export default function SentenceReducer(state = initialState,action){
           enableUpdateButton : action.sentence.split(" ").length > 1,
           showJumbledWords : false,
           JumbledWords : [],
-          answerWords : []
+          answerWords : [],
+          showResult : false,
+          isSentenceCorrect : null
         })
 
     case SentenceActions.JUMBLE_WORDS:
@@ -37,7 +40,9 @@ export default function SentenceReducer(state = initialState,action){
           })),
           answerWords : [],
           sentenceLength : wordArray.length,
-          wordsRemaining : wordArray.length
+          wordsRemaining : wordArray.length,
+          isSentenceCorrect : null,
+          showResult : false
         })
 
     case SentenceActions.ADD_TO_ANSWER:
@@ -46,11 +51,21 @@ export default function SentenceReducer(state = initialState,action){
         let jumbledArray = state.JumbledWords.filter((word) => word.id !== action.id);
         let answerWords = state.answerWords;
         answerWords.push(wordSelected);
+        let isSentenceCorrect = false;
+
+        if (state.isSentenceCorrect !== null && state.isSentenceCorrect && answerWords.length > 1) {
+            isSentenceCorrect = answerWords[answerWords.length - 2].id + 1 === answerWords[answerWords.length - 1].id;
+        }
+        else if(answerWords.length === 1){
+          isSentenceCorrect = (wordSelected.id === 0);
+        }
 
         return Object.assign({}, state, {
           JumbledWords : jumbledArray,
           answerWords : answerWords,
-          wordsRemaining : state.wordsRemaining-1
+          wordsRemaining : state.wordsRemaining-1,
+          isSentenceCorrect,
+          showResult : state.wordsRemaining-1 === 0
         })
 
     case SentenceActions.REMOVE_FROM_ANSWER:
@@ -63,7 +78,8 @@ export default function SentenceReducer(state = initialState,action){
         return Object.assign({}, state, {
           JumbledWords : JumbledWords,
           answerWords : answerArray,
-          wordsRemaining : state.wordsRemaining+1
+          wordsRemaining : state.wordsRemaining+1,
+          showResult : state.wordsRemaining + 1 === 0
         })
 
     default:

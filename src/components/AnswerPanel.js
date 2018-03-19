@@ -17,7 +17,7 @@ class AnswerPanel extends Component {
                 key={word.id}
                 word={word.word}
                 id={word.id}
-                style={"grey lighten-4 black-text"}
+                addStyle={"grey lighten-4 black-text"}
                 action={() => (this.props.removeFromAnswer(word.id))}
               />
             ))

@@ -15,7 +15,7 @@ class WordListPanel extends Component {
               key={word.id}
               word={word.word}
               id={word.id}
-              style={"grey lighten-4 blue-text"}
+              addStyle={"grey lighten-4 blue-text"}
               action={() => (this.props.addToAnswer(word.id))}
             />
           ))}
