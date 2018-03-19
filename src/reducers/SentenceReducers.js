@@ -17,7 +17,7 @@ export default function SentenceReducer(state = initialState,action){
 
     case SentenceActions.UPDATE_SENTECE:
         return Object.assign({}, state, {
-          Sentence : action.sentence.trim(),
+          Sentence : action.sentence.replace(/\s\s+/g, ' ').trim(),
           enableUpdateButton : action.sentence.split(" ").length > 1,
           showJumbledWords : false,
           JumbledWords : [],

@@ -8,12 +8,12 @@ class InputPanel extends Component {
 
     let id = 0;
 
-    let wordArray = this.props.sentence.split(" ")
+    let wordArray = this.props.sentence.replace(/\s\s+/g, ' ').split(" ")
                     .map((word) => ({
                         id : id++,
                         word
                       }));
-                      
+
     let currentIndex = wordArray.length, tempWord, randomIndex;
 
     while (0 !== currentIndex) {
@@ -39,6 +39,7 @@ class InputPanel extends Component {
             placeholder="Your Sentence Here"
             id="sentence"
             type="text"
+            value={this.props.Sentence}
             onChange={(event) => {this.props.updateSentence(event.target.value)}}
            />
           <label htmlFor="sentence">Sentence</label>
@@ -50,7 +51,7 @@ class InputPanel extends Component {
           className="waves-effect waves-light btn"
           onClick={() => {this.jumbleWords()}}
         >
-          UPDATE
+          REFRESH
         </div>
 
       </div>
