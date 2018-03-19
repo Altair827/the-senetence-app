@@ -44,20 +44,12 @@ export default function SentenceReducer(state = initialState,action){
         let jumbledArray = state.JumbledWords.filter((word) => word.id !== action.id);
         let answerWords = state.answerWords;
         answerWords.push(wordSelected);
-        let isSentenceCorrect = false;
-
-        if (state.isSentenceCorrect !== null && state.isSentenceCorrect && answerWords.length > 1) {
-            isSentenceCorrect = answerWords[answerWords.length - 2].id + 1 === answerWords[answerWords.length - 1].id;
-        }
-        else if(answerWords.length === 1){
-          isSentenceCorrect = (wordSelected.id === 0);
-        }
 
         return Object.assign({}, state, {
           JumbledWords : jumbledArray,
           answerWords : answerWords,
           wordsRemaining : state.wordsRemaining-1,
-          isSentenceCorrect,
+          isSentenceCorrect : answerWords.map((word) => word.word).join(' ') === state.Sentence,
           showResult : state.wordsRemaining-1 === 0
         })
 
