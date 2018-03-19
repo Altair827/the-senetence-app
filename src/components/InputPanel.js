@@ -3,6 +3,33 @@ import { connect } from 'react-redux';
 import { updateSentence, jumbleWords } from './../actions/SentenceActions'
 
 class InputPanel extends Component {
+
+  jumbleWords = () => {
+
+    let id = 0;
+
+    let wordArray = this.props.sentence.split(" ")
+                    .map((word) => ({
+                        id : id++,
+                        word
+                      }));
+                      
+    let currentIndex = wordArray.length, tempWord, randomIndex;
+
+    while (0 !== currentIndex) {
+
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      tempWord = wordArray[currentIndex];
+      wordArray[currentIndex] = wordArray[randomIndex];
+      wordArray[randomIndex] = tempWord;
+    }
+
+    this.props.jumbleWords(wordArray);
+  }
+
+
   render() {
     return (
       <div id="inputBlock" className="row">
@@ -21,7 +48,7 @@ class InputPanel extends Component {
           id="updateButton"
           disabled={!this.props.enableUpdateButton}
           className="waves-effect waves-light btn"
-          onClick={() => {this.props.jumbleWords()}}
+          onClick={() => {this.jumbleWords()}}
         >
           UPDATE
         </div>
@@ -33,14 +60,15 @@ class InputPanel extends Component {
 
 const mapStateToProps = (SentenceReducer) => {
   return {
-    enableUpdateButton : SentenceReducer.enableUpdateButton
+    enableUpdateButton : SentenceReducer.enableUpdateButton,
+    sentence : SentenceReducer.Sentence
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     updateSentence : (sentence) => dispatch(updateSentence(sentence)),
-    jumbleWords : () => dispatch(jumbleWords())
+    jumbleWords : (wordArray) => dispatch(jumbleWords(wordArray))
   };
 }
 

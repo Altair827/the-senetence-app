@@ -10,8 +10,9 @@ export const updateSentence = (sentence) => ({
   sentence
 })
 
-export const jumbleWords = () => ({
-  type : SentenceActions.JUMBLE_WORDS
+export const jumbleWords = (wordArray) => ({
+  type : SentenceActions.JUMBLE_WORDS,
+  wordArray
 })
 
 export const addToAnswer = (id) => ({

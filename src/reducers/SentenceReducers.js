@@ -28,19 +28,12 @@ export default function SentenceReducer(state = initialState,action){
 
     case SentenceActions.JUMBLE_WORDS:
 
-        let wordArray = state.Sentence.split(" ");
-
-        let id = 0;
-
         return Object.assign({}, state, {
           showJumbledWords : true,
-          JumbledWords : wordArray.map((word) => ({
-            id : id++,
-            word
-          })),
+          JumbledWords : action.wordArray,
           answerWords : [],
-          sentenceLength : wordArray.length,
-          wordsRemaining : wordArray.length,
+          sentenceLength : action.wordArray.length,
+          wordsRemaining : action.wordArray.length,
           isSentenceCorrect : null,
           showResult : false
         })
